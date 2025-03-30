@@ -19,7 +19,7 @@ setInterval(() => counter.value++, 1000);
         </header>
 
         <main>
-            <slot/>
+            <slot />
         </main>
     </div>
 </template>
