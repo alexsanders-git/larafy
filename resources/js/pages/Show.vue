@@ -3,6 +3,6 @@ import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Home"/>
-        <h1>Hello Laravel!!!</h1>
+    <Head title="Show"/>
+    <h1>Show</h1>
 </template>
