@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
-class HandleInertiaRequests extends Middleware
-{
+class HandleInertiaRequests extends Middleware {
     /**
      * The root template that's loaded on the first page visit.
      *
@@ -23,9 +22,8 @@ class HandleInertiaRequests extends Middleware
      *
      * @see https://inertiajs.com/asset-versioning
      */
-    public function version(Request $request): ?string
-    {
-        return parent::version($request);
+    public function version( Request $request ): ?string {
+        return parent::version( $request );
     }
 
     /**
@@ -35,21 +33,23 @@ class HandleInertiaRequests extends Middleware
      *
      * @return array<string, mixed>
      */
-    public function share(Request $request): array
-    {
-        [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
+    public function share( Request $request ): array {
+        [ $message, $author ] = str( Inspiring::quotes()->random() )->explode( '-' );
 
         return [
-            ...parent::share($request),
-            'name' => config('app.name'),
-            'quote' => ['message' => trim($message), 'author' => trim($author)],
+            ...parent::share( $request ),
+            'name' => config( 'app.name' ),
+            'quote' => [ 'message' => trim( $message ), 'author' => trim( $author ) ],
             'auth' => [
                 'user' => $request->user(),
             ],
             'ziggy' => [
-                ...(new Ziggy)->toArray(),
+                ...( new Ziggy )->toArray(),
                 'location' => $request->url(),
             ],
+            'flash' => [
+                'success' => $request->session()->get( 'success' ),
+            ]
         ];
     }
 }

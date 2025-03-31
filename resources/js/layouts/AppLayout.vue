@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { computed, ref } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+
+const page = usePage();
+const successMessage = computed(
+    () => page.props.flash.success
+);
 
 const counter = ref(0);
 
@@ -16,6 +21,10 @@ setInterval(() => counter.value++, 1000);
             </nav>
 
             <div>{{ counter }}</div>
+
+            <div v-if="successMessage" class="p-2 bg-green-500 text-white border border-green-800">
+                {{ successMessage }}
+            </div>
         </header>
 
         <main>
