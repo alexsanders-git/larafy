@@ -12,5 +12,4 @@ Route::get( '/show', function () {
     return Inertia::render( 'Show' );
 } )->name( 'show' );
 
-Route::resource( 'listing', ListingController::class )
-    ->only( [ 'index', 'show', 'create', 'store' ] );
+Route::resource( 'listing', ListingController::class );

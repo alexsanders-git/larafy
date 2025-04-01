@@ -1,24 +1,31 @@
 <script setup lang="ts">
 import { Head, useForm } from '@inertiajs/vue3';
+import type { Listing } from '@/types';
+
+interface IProps {
+    listing: Listing;
+}
+
+const props = defineProps<IProps>();
 
 const form = useForm({
-    beds: 0,
-    baths: 0,
-    area: 0,
-    city: null,
-    code: null,
-    street: null,
-    street_num: null,
-    price: 0
+    beds: props.listing.beds,
+    baths: props.listing.baths,
+    area: props.listing.area,
+    city: props.listing.city,
+    code: props.listing.code,
+    street: props.listing.street,
+    street_num: props.listing.street_num,
+    price: props.listing.price
 });
 
-const create = () => form.post(route('listing.store'));
+const update = () => form.put(route('listing.update', props.listing.id));
 </script>
 
 <template>
-    <Head title="Create" />
+    <Head title="Update" />
     <div class="container mx-auto px-4">
-        <form @submit.prevent="create">
+        <form @submit.prevent="update">
             <div>
                 <label>Beds</label>
                 <input type="text" v-model="form.beds" />
@@ -68,7 +75,7 @@ const create = () => form.post(route('listing.store'));
             </div>
 
             <div>
-                <button class="p-2 bg-violet-300" type="submit">Create</button>
+                <button class="p-2 bg-violet-300" type="submit">Edit</button>
             </div>
         </form>
     </div>

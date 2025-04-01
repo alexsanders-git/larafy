@@ -28,7 +28,18 @@ class ListingController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store( Request $request ) {
-        Listing::create( $request->all() );
+        Listing::created(
+            $request->validate( [
+                'beds' => 'required|integer|min:1|max:20',
+                'baths' => 'required|integer|min:1|max:20',
+                'area' => 'required|integer|min:15|max:1500',
+                'city' => 'required',
+                'code' => 'required',
+                'street' => 'required',
+                'street_num' => 'required|min:1|max:1000',
+                'price' => 'required|integer|min:15|max:20000000',
+            ] ),
+        );
 
         return Redirect::route( 'listing.index' )
             ->with( 'success', 'Listing created successfully' );
@@ -46,21 +57,40 @@ class ListingController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( string $id ) {
-        //
+    public function edit( Listing $listing ) {
+        return Inertia::render( 'listing/Edit', [
+            'listing' => $listing,
+        ] );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update( Request $request, string $id ) {
-        //
+    public function update( Request $request, Listing $listing ) {
+        $listing->update(
+            $request->validate( [
+                'beds' => 'required|integer|min:1|max:20',
+                'baths' => 'required|integer|min:1|max:20',
+                'area' => 'required|integer|min:15|max:1500',
+                'city' => 'required',
+                'code' => 'required',
+                'street' => 'required',
+                'street_num' => 'required',
+                'price' => 'required|integer|min:15|max:20000000',
+            ] ),
+        );
+
+        return Redirect::route( 'listing.index' )
+            ->with( 'success', 'Listing updated successfully' );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( string $id ) {
-        //
+    public function destroy( Listing $listing ) {
+        $listing->delete();
+
+        return Redirect::route( 'listing.index' )
+            ->with( 'success', 'Listing deleted successfully' );
     }
 }

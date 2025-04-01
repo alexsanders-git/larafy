@@ -14,9 +14,20 @@ defineProps<IProps>();
     <Head title="Listing" />
     <div class="container mx-auto">
         <div v-for="listing in listings" :key="listing.id">
-            <Link :href="`/listing/${listing.id}`">
-                <ListingAddress :listing="listing" />
-            </Link>
+            <div>
+                <Link :href="route('listing.show', listing.id)">
+                    <ListingAddress :listing="listing" />
+                </Link>
+            </div>
+            <div>
+                <Link :href="route('listing.edit', listing.id)">
+                    Edit
+                </Link>
+
+                <Link :href="route('listing.destroy', listing.id)" method="delete" as="button">
+                    Delete
+                </Link>
+            </div>
         </div>
     </div>
 </template>
