@@ -9,5 +9,5 @@ defineProps<IProps>();
 </script>
 
 <template>
-    <span>{{ listing.street }} {{ listing.street_num }}, {{ listing.city }} - ${{ listing.price }}</span>
+    <span>{{ listing.street }} {{ listing.street_num }}, {{ listing.city }}</span>
 </template>
