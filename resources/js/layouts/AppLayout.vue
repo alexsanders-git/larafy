@@ -29,8 +29,9 @@ const user = computed(
                         <Link :href="route('logout')" method="delete" as="button">Logout</Link>
                     </div>
 
-                    <div v-else>
+                    <div v-else class="flex items-center gap-2">
                         <Link :href="route('login')">Login</Link>
+                        <Link :href="route('account.create')">Register</Link>
                     </div>
                 </nav>
             </div>
