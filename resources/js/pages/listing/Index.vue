@@ -18,11 +18,13 @@ defineProps<IProps>();
     <div class="container mx-auto">
         <Filters :filters="filters" />
 
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div v-if="listings.data.length" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             <ListingItem v-for="listing in listings.data" :key="listing.id" :listing="listing" />
         </div>
 
-        <div v-if="listings.data.length" class="w-full flex justify-center mt-8">
+        <div v-else class="text-2xl font-medium text-center">Listing not found</div>
+
+        <div v-if="listings.links.length > 3" class="w-full flex justify-center mt-8">
             <Pagination :links="listings.links" />
         </div>
     </div>
