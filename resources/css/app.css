@@ -7,6 +7,10 @@
 }
 
 @layer components {
+    input, select, textarea {
+        @apply outline-indigo-500
+    }
+
     .label {
         @apply block mb-1 text-gray-500 dark:text-gray-300 font-medium
     }
@@ -17,6 +21,22 @@
 
     .input-error {
         @apply mt-0.5 text-sm text-red-500 dark:text-red-400
+    }
+
+    .input-filter {
+        @apply w-28 p-2 bg-white placeholder:text-gray-400 dark:placeholder:text-gray-600 border border-gray-200 dark:border-gray-700 text-sm font-medium text-gray-600 dark:text-gray-400 dark:bg-gray-800
+    }
+
+    .input-filter-l {
+        @apply rounded-t-md rounded-l-md rounded-b-md rounded-r-none
+    }
+
+    .input-filter-r {
+        @apply border-l-0 rounded-t-md rounded-l-none rounded-b-none rounded-r-md
+    }
+
+    .button-normal {
+        @apply p-2 font-medium text-white bg-gray-600 hover:bg-gray-500 rounded-md transition
     }
 
     .button-primary {

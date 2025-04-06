@@ -18,7 +18,16 @@ export interface PaginationLink {
     active: boolean;
 }
 
-export interface ListingsResponce {
+export interface ListingFilters {
+    priceFrom: number | null,
+    priceTo: number | null,
+    beds: string | null,
+    baths: string | null,
+    areaFrom: number | null,
+    areaTo: number | null
+}
+
+export interface ListingsResponse {
     current_page: number;
     data: Listing[];
     first_page_url: string;
