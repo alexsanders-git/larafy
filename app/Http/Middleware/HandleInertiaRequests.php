@@ -38,6 +38,10 @@ class HandleInertiaRequests extends Middleware {
 
         return [
             ...parent::share( $request ),
+            'ziggy' => [
+                ...( new Ziggy )->toArray(),
+                'location' => $request->url(),
+            ],
             'flash' => [
                 'success' => $request->session()->get( 'success' ),
             ],

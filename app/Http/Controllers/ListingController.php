@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -28,7 +30,7 @@ class ListingController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store( Request $request ) {
-        Listing::created(
+        $request->user()->listings()->create(
             $request->validate( [
                 'beds' => 'required|integer|min:1|max:20',
                 'baths' => 'required|integer|min:1|max:20',
@@ -58,6 +60,8 @@ class ListingController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit( Listing $listing ) {
+        Gate::authorize( 'update', $listing );
+
         return Inertia::render( 'listing/Edit', [
             'listing' => $listing,
         ] );
@@ -67,6 +71,8 @@ class ListingController extends Controller {
      * Update the specified resource in storage.
      */
     public function update( Request $request, Listing $listing ) {
+        Gate::authorize( 'update', $listing );
+
         $listing->update(
             $request->validate( [
                 'beds' => 'required|integer|min:1|max:20',
