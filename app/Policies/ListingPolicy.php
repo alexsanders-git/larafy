@@ -8,9 +8,7 @@ use Illuminate\Auth\Access\Response;
 
 class ListingPolicy {
     public function before( ?User $user, $ability ) {
-        if ( $user?->is_admin ) {
-            return true;
-        }
+        if ( $user?->is_admin ) return true;
     }
 
     /**

@@ -35,7 +35,14 @@ defineProps<IProps>();
                 <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
                     <Link class="button-outline text-sm font-medium">Preview</Link>
                     <Link class="button-outline text-sm font-medium">Edit</Link>
-                    <Link class="button-outline text-sm font-medium">Delite</Link>
+                    <Link
+                        :href="route('realtor.listing.destroy', {listing: listing.id})"
+                        class="button-outline text-sm font-medium"
+                        method="delete"
+                        as="button"
+                    >
+                        Delete
+                    </Link>
                 </div>
             </div>
         </Box>
