@@ -27,7 +27,7 @@ const user = computed(
                         <Link :href="route('realtor.listing.index')" class="text-sm text-gray-500">
                             {{ user.name }}
                         </Link>
-                        <Link :href="route('listing.create')" class="button-primary">+ New Listing</Link>
+                        <Link :href="route('realtor.listing.create')" class="button-primary">+ New Listing</Link>
                         <Link :href="route('logout')" method="delete" as="button">Logout</Link>
                     </div>
 

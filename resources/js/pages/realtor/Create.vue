@@ -1,30 +1,23 @@
 <script setup lang="ts">
 import { Head, useForm } from '@inertiajs/vue3';
-import type { Listing } from '@/types';
-
-interface IProps {
-    listing: Listing;
-}
-
-const props = defineProps<IProps>();
 
 const form = useForm({
-    beds: props.listing.beds,
-    baths: props.listing.baths,
-    area: props.listing.area,
-    city: props.listing.city,
-    code: props.listing.code,
-    street: props.listing.street,
-    street_num: props.listing.street_num,
-    price: props.listing.price
+    beds: 0,
+    baths: 0,
+    area: 0,
+    city: null,
+    code: null,
+    street: null,
+    street_num: null,
+    price: 0
 });
 
-const update = () => form.put(route('listing.update', props.listing.id));
+const create = () => form.post(route('realtor.listing.store'));
 </script>
 
 <template>
-    <Head title="Update" />
-    <form class="grid grid-cols-1 md:grid-cols-2 gap-4" @submit.prevent="update">
+    <Head title="Create" />
+    <form class="grid grid-cols-1 md:grid-cols-2 gap-4" @submit.prevent="create">
         <div>
             <label class="label">Beds</label>
             <input v-model="form.beds" type="text" class="input" />
@@ -78,9 +71,3 @@ const update = () => form.put(route('listing.update', props.listing.id));
         </div>
     </form>
 </template>
-
-<style scoped>
-input[type='text'] {
-    @apply mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus-visible:outline-none focus:ring-violet-500 focus-visible:ring-violet-500 focus:border-violet-500 focus-visible:border-violet-500 block w-full p-2.5;
-}
-</style>

@@ -5,11 +5,12 @@ import ListingPrice from '@/components/ListingPrice.vue';
 import ListingParams from '@/components/ListingParams.vue';
 import ListingAddress from '@/components/ListingAddress.vue';
 import RealtorFilters from '@/components/RealtorFilters.vue';
-import { Listing, RealtorListingFilters } from '@/types';
+import Pagination from '@/components/Pagination.vue';
+import type { ListingsResponse, RealtorListingFilters } from '@/types';
 
 interface IProps {
     filters: RealtorListingFilters;
-    listings: Listing[];
+    listings: ListingsResponse;
 }
 
 defineProps<IProps>();
@@ -21,7 +22,7 @@ defineProps<IProps>();
     <RealtorFilters :filters="filters" class="my-4" />
 
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        <Box v-for="listing in listings" :key="listing.id">
+        <Box v-for="listing in listings.data" :key="listing.id">
             <div class="flex flex-col md:flex-row md:items-center gap-2 justify-between">
                 <div>
                     <div class="xl:flex items-center gap-2">
@@ -33,8 +34,21 @@ defineProps<IProps>();
                 </div>
 
                 <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                    <Link class="button-outline text-sm font-medium">Preview</Link>
-                    <Link class="button-outline text-sm font-medium">Edit</Link>
+                    <a
+                        :href="route('listing.show', {listing: listing.id})"
+                        class="button-outline text-sm font-medium"
+                        target="_blank"
+                    >
+                        Preview
+                    </a>
+
+                    <Link
+                        :href="route('realtor.listing.edit', {listing: listing.id})"
+                        class="button-outline text-sm font-medium"
+                    >
+                        Edit
+                    </Link>
+
                     <Link
                         :href="route('realtor.listing.destroy', {listing: listing.id})"
                         class="button-outline text-sm font-medium"
@@ -47,4 +61,8 @@ defineProps<IProps>();
             </div>
         </Box>
     </section>
+
+    <div v-if="listings.links.length > 3" class="w-full flex justify-center mt-8">
+        <Pagination :links="listings.links" />
+    </div>
 </template>

@@ -23,8 +23,7 @@ defineProps<IProps>();
             <span
                 v-else
                 v-html="link.label"
-                :class="{'bg-indigo-500 dark:bg-indigo-800 text-gray-100': link.active}"
-                class="py-2 px-4 rounded-md"
+                class="py-2 px-4 rounded-md opacity-50"
             />
         </template>
     </div>
