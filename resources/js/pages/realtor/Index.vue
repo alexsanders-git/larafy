@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import Box from '@/components/Box.vue';
-import type { Listing } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
+import Box from '@/components/Box.vue';
 import ListingPrice from '@/components/ListingPrice.vue';
 import ListingParams from '@/components/ListingParams.vue';
 import ListingAddress from '@/components/ListingAddress.vue';
+import RealtorFilters from '@/components/RealtorFilters.vue';
+import { Listing, RealtorListingFilters } from '@/types';
 
 interface IProps {
+    filters: RealtorListingFilters;
     listings: Listing[];
 }
 
@@ -16,9 +18,7 @@ defineProps<IProps>();
 <template>
     <Head title="Realtor" />
     <h1 class="text-3xl mb-4">Your Listings</h1>
-    <section class="mb-4">
-        Filters
-    </section>
+    <RealtorFilters :filters="filters" class="my-4" />
 
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <Box v-for="listing in listings" :key="listing.id">

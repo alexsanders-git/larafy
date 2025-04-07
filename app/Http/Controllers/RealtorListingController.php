@@ -11,8 +11,18 @@ use Inertia\Inertia;
 
 class RealtorListingController extends Controller {
     public function index( Request $request ) {
+        $filters = [
+            'deleted' => $request->boolean( 'deleted' ),
+            ...$request->only( [ 'by', 'order' ] ),
+        ];
+
         return Inertia::render( 'realtor/Index', [
-            'listings' => Auth::user()->listings
+            'filters' => $filters,
+            'listings' => Auth::user()
+                ->listings()
+                // ->mostRecent()
+                ->filter( $filters )
+                ->get()
         ] );
     }
 

@@ -27,6 +27,12 @@ export interface ListingFilters {
     areaTo: number | null
 }
 
+export interface RealtorListingFilters {
+    by: string,
+    order: string,
+    deleted: boolean
+}
+
 export interface ListingsResponse {
     current_page: number;
     data: Listing[];
