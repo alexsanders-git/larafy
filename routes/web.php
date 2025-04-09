@@ -14,7 +14,8 @@ Route::get( '/', function () {
 
 // Listing
 Route::resource( 'listing', ListingController::class )
-    ->only( [ 'index', 'show' ] );
+    ->only( [ 'index', 'show' ] )
+    ->withTrashed();;
 
 // Auth
 Route::get( 'login', [ AuthController::class, 'create' ] )
