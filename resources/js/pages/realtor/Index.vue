@@ -22,9 +22,13 @@ defineProps<IProps>();
     <RealtorFilters :filters="filters" class="my-4" />
 
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        <Box v-for="listing in listings.data" :key="listing.id">
+        <Box
+            v-for="listing in listings.data"
+            :key="listing.id"
+            :class="{'border-dashed': listing.deleted_at}"
+        >
             <div class="flex flex-col md:flex-row md:items-center gap-2 justify-between">
-                <div>
+                <div :class="{'opacity-50': listing.deleted_at}">
                     <div class="xl:flex items-center gap-2">
                         <ListingPrice :price="listing.price" class="text-2xl font-medium" />
                         <ListingParams :listing="listing" />
@@ -50,12 +54,23 @@ defineProps<IProps>();
                     </Link>
 
                     <Link
+                        v-if="!listing.deleted_at"
                         :href="route('realtor.listing.destroy', {listing: listing.id})"
                         class="button-outline text-sm font-medium"
                         method="delete"
                         as="button"
                     >
                         Delete
+                    </Link>
+
+                    <Link
+                        v-else
+                        :href="route('realtor.listing.restore', {listing: listing.id})"
+                        class="button-outline text-sm font-medium"
+                        method="put"
+                        as="button"
+                    >
+                        Restore
                     </Link>
                 </div>
             </div>

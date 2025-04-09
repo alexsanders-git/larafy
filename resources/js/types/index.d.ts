@@ -10,27 +10,13 @@ export interface Listing {
     price: number;
     created_at: string;
     updated_at: string;
+    deleted_at: string;
 }
 
 export interface PaginationLink {
     url: string | null;
     label: string;
     active: boolean;
-}
-
-export interface ListingFilters {
-    priceFrom: number | null,
-    priceTo: number | null,
-    beds: string | null,
-    baths: string | null,
-    areaFrom: number | null,
-    areaTo: number | null
-}
-
-export interface RealtorListingFilters {
-    by: string,
-    order: string,
-    deleted: boolean
 }
 
 export interface ListingsResponse {
@@ -47,4 +33,19 @@ export interface ListingsResponse {
     prev_page_url: any;
     to: number;
     total: number;
+}
+
+export interface ListingFilters {
+    priceFrom: number | null,
+    priceTo: number | null,
+    beds: string | null,
+    baths: string | null,
+    areaFrom: number | null,
+    areaTo: number | null
+}
+
+export interface RealtorListingFilters {
+    by: string,
+    order: string,
+    deleted: boolean
 }
