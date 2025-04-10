@@ -11,6 +11,17 @@ export interface Listing {
     created_at: string;
     updated_at: string;
     deleted_at: string;
+    images_count?: number;
+    images: ListingImages[];
+}
+
+export interface ListingImages {
+    id: number;
+    created_at: string;
+    updated_at: string;
+    filename: string;
+    listing_id: number;
+    src: string;
 }
 
 export interface PaginationLink {

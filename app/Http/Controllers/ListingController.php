@@ -25,6 +25,8 @@ class ListingController extends Controller {
 
     /** Display the specified resource. */
     public function show( Listing $listing ) {
+        $listing->load( 'images' );
+
         return Inertia::render( 'listing/Show', [
             'listing' => $listing,
         ] );

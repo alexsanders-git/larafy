@@ -37,41 +37,52 @@ defineProps<IProps>();
                     <ListingAddress :listing="listing" class="text-gray-500" />
                 </div>
 
-                <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                    <a
-                        :href="route('listing.show', {listing: listing.id})"
-                        class="button-outline text-sm font-medium"
-                        target="_blank"
-                    >
-                        Preview
-                    </a>
+                <div class="">
+                    <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
+                        <a
+                            :href="route('listing.show', {listing: listing.id})"
+                            class="button-outline text-sm font-medium"
+                            target="_blank"
+                        >
+                            Preview
+                        </a>
 
-                    <Link
-                        :href="route('realtor.listing.edit', {listing: listing.id})"
-                        class="button-outline text-sm font-medium"
-                    >
-                        Edit
-                    </Link>
+                        <Link
+                            :href="route('realtor.listing.edit', {listing: listing.id})"
+                            class="button-outline text-sm font-medium"
+                        >
+                            Edit
+                        </Link>
 
-                    <Link
-                        v-if="!listing.deleted_at"
-                        :href="route('realtor.listing.destroy', {listing: listing.id})"
-                        class="button-outline text-sm font-medium"
-                        method="delete"
-                        as="button"
-                    >
-                        Delete
-                    </Link>
+                        <Link
+                            v-if="!listing.deleted_at"
+                            :href="route('realtor.listing.destroy', {listing: listing.id})"
+                            class="button-outline text-sm font-medium"
+                            method="delete"
+                            as="button"
+                        >
+                            Delete
+                        </Link>
 
-                    <Link
-                        v-else
-                        :href="route('realtor.listing.restore', {listing: listing.id})"
-                        class="button-outline text-sm font-medium"
-                        method="put"
-                        as="button"
-                    >
-                        Restore
-                    </Link>
+                        <Link
+                            v-else
+                            :href="route('realtor.listing.restore', {listing: listing.id})"
+                            class="button-outline text-sm font-medium"
+                            method="put"
+                            as="button"
+                        >
+                            Restore
+                        </Link>
+                    </div>
+
+                    <div class="mt-2">
+                        <Link
+                            :href="route('realtor.listing.image.create', {listing: listing.id})"
+                            class="block w-full text-center button-outline text-sm font-medium"
+                        >
+                            Images ({{ listing.images_count }})
+                        </Link>
+                    </div>
                 </div>
             </div>
         </Box>
