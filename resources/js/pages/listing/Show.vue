@@ -5,6 +5,7 @@ import Box from '@/components/Box.vue';
 import ListingPrice from '@/components/ListingPrice.vue';
 import ListingParams from '@/components/ListingParams.vue';
 import ListingAddress from '@/components/ListingAddress.vue';
+import MakeOffer from '@/components/MakeOffer.vue';
 import { useMonthlyPayment } from '@/composables/useMonthlyPayment';
 import type { Listing } from '@/types';
 
@@ -97,6 +98,8 @@ const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(props.lis
                     </div>
                 </div>
             </Box>
+
+            <MakeOffer :listing-id="listing.id" :price="listing.price" />
         </div>
     </div>
 </template>
