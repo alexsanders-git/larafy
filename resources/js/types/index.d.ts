@@ -12,6 +12,7 @@ export interface Listing {
     updated_at: string;
     deleted_at: string;
     images_count?: number;
+    offers_count?: number;
     images: ListingImages[];
 }
 

@@ -83,6 +83,15 @@ defineProps<IProps>();
                             Images ({{ listing.images_count }})
                         </Link>
                     </div>
+
+                    <div class="mt-2">
+                        <Link
+                            :href="route('realtor.listing.show', {listing: listing.id})"
+                            class="block w-full text-center button-outline text-sm font-medium"
+                        >
+                            Offers ({{ listing.offers_count }})
+                        </Link>
+                    </div>
                 </div>
             </div>
         </Box>
