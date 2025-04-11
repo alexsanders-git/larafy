@@ -5,12 +5,14 @@ import Box from '@/components/Box.vue';
 import ListingPrice from '@/components/ListingPrice.vue';
 import ListingParams from '@/components/ListingParams.vue';
 import ListingAddress from '@/components/ListingAddress.vue';
-import MakeOffer from '@/components/MakeOffer.vue';
+import OfferMake from '@/components/OfferMake.vue';
+import OfferMade from '@/components/OfferMade.vue';
 import { useMonthlyPayment } from '@/composables/useMonthlyPayment';
-import type { Listing } from '@/types';
+import type { Listing, Offer } from '@/types';
 
 interface IProps {
     listing: Listing;
+    offerMade: Offer;
 }
 
 const props = defineProps<IProps>();
@@ -106,12 +108,14 @@ const user = computed(
                 </div>
             </Box>
 
-            <MakeOffer
-                v-if="user"
+            <OfferMake
+                v-if="user && !offerMade"
                 :listing-id="listing.id"
                 :price="listing.price"
                 @offer-updated="offer = $event"
             />
+
+            <OfferMade v-if="user && offerMade" :offer="offerMade" />
         </div>
     </div>
 </template>

@@ -26,9 +26,11 @@ class ListingController extends Controller {
     /** Display the specified resource. */
     public function show( Listing $listing ) {
         $listing->load( 'images' );
+        $offer = !Auth::user() ? null : $listing->offers()->byMe()->first();
 
         return Inertia::render( 'listing/Show', [
             'listing' => $listing,
+            'offerMade' => $offer
         ] );
     }
 }

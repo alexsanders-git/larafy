@@ -60,3 +60,14 @@ export interface RealtorListingFilters {
     order: string,
     deleted: boolean
 }
+
+export interface Offer {
+    id: number;
+    created_at: string;
+    updated_at: string;
+    listing_id: number;
+    bidder_id: number;
+    amount: number;
+    accepted_at: number | null;
+    rejected_at: number | null;
+}
