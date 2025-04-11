@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { computed, watch } from 'vue';
+import { useForm } from '@inertiajs/vue3';
+import debounce from 'lodash/debounce';
 import Box from '@/components/Box.vue';
 import ListingPrice from '@/components/ListingPrice.vue';
-import { useForm } from '@inertiajs/vue3';
-import { computed } from 'vue';
 
 interface IProps {
     listingId: number;
@@ -15,9 +16,29 @@ const form = useForm({
     amount: props.price
 });
 
+const makeOffer = () => form.post(
+    route('listing.offer.store',
+        { listing: props.listingId }
+    ), {
+        preserveScroll: true,
+        preserveState: true
+    }
+);
+
 const difference = computed(() => form.amount - props.price);
-const min = computed(() => props.price / 2);
-const max = computed(() => props.price * 2);
+const min = computed(() => Math.round(props.price / 2));
+const max = computed(() => Math.round(props.price * 2));
+
+interface IEmits {
+    offerUpdated: [value: number | null];
+}
+
+const emit = defineEmits<IEmits>();
+
+watch(
+    () => form.amount,
+    debounce((value: number) => emit('offerUpdated', value), 200)
+);
 </script>
 
 <template>
@@ -27,7 +48,7 @@ const max = computed(() => props.price * 2);
         </template>
 
         <div>
-            <form>
+            <form @submit.prevent="makeOffer">
                 <input v-model.number="form.amount" type="text" class="input" />
 
                 <input

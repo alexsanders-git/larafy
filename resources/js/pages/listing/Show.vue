@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { computed, ref } from 'vue';
+import { Head, usePage } from '@inertiajs/vue3';
 import Box from '@/components/Box.vue';
 import ListingPrice from '@/components/ListingPrice.vue';
 import ListingParams from '@/components/ListingParams.vue';
@@ -15,11 +15,18 @@ interface IProps {
 
 const props = defineProps<IProps>();
 
+const offer = ref(props.listing.price);
+
 const interestRate = ref<number>(2.5);
 const duration = ref<number>(25);
 
+const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(offer, interestRate, duration);
 
-const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(props.listing.price, interestRate, duration);
+const page = usePage();
+
+const user = computed(
+    () => page.props.user
+);
 </script>
 
 <template>
@@ -99,7 +106,12 @@ const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(props.lis
                 </div>
             </Box>
 
-            <MakeOffer :listing-id="listing.id" :price="listing.price" />
+            <MakeOffer
+                v-if="user"
+                :listing-id="listing.id"
+                :price="listing.price"
+                @offer-updated="offer = $event"
+            />
         </div>
     </div>
 </template>
