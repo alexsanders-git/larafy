@@ -72,4 +72,15 @@ export interface Offer {
     amount: number;
     accepted_at: number | null;
     rejected_at: number | null;
+    bidder: Bidder;
+}
+
+export interface Bidder {
+    id: number;
+    name: string;
+    email: string;
+    email_verified_at: string;
+    created_at: string;
+    updated_at: string;
+    is_admin: number;
 }

@@ -37,7 +37,7 @@ const madeOn = computed(
                 </div>
 
                 <div class="text-gray-500 text-sm">
-                    Made by John Doe
+                    Made by {{ offer.bidder.name }}
                 </div>
 
                 <div class="text-gray-500 text-sm">
@@ -47,8 +47,9 @@ const madeOn = computed(
 
             <div>
                 <Link
-                    href="google.com"
+                    :href="route('realtor.offer.accept', {offer: offer.id})"
                     class="button-outline text-sm font-medium"
+                    method="put"
                     as="button"
                 >
                     Accept

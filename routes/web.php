@@ -6,6 +6,7 @@ use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\UserAccountController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
+use App\Http\Controllers\RealtorListingAcceptOfferController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -47,6 +48,8 @@ Route::prefix( 'realtor' )
             ->withTrashed();
         Route::resource( 'listing', RealtorListingController::class )
             ->withTrashed();
+
+        Route::name( 'offer.accept' )->put( 'offer/{offer}/accept', RealtorListingAcceptOfferController::class );
 
         Route::resource( 'listing.image', RealtorListingImageController::class )
             ->only( [ 'create', 'store', 'destroy' ] );
