@@ -15,6 +15,7 @@ export interface Listing {
     offers_count?: number;
     images: ListingImages[];
     offers: Offer[];
+    sold_at: string | null;
 }
 
 export interface ListingImages {

@@ -29,6 +29,13 @@ defineProps<IProps>();
         >
             <div class="flex flex-col md:flex-row md:items-center gap-2 justify-between">
                 <div :class="{'opacity-50': listing.deleted_at}">
+                    <div
+                        v-if="listing.sold_at != null"
+                        class="text-sm font-bold uppercase border border-dashed p-1 border-green-300 text-green-500 dark:border-green-600 dark:text-green-600 inline-block rounded-md mb-2"
+                    >
+                        sold
+                    </div>
+
                     <div class="xl:flex items-center gap-2">
                         <ListingPrice :price="listing.price" class="text-2xl font-medium" />
                         <ListingParams :listing="listing" />

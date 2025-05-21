@@ -8,6 +8,7 @@ import { computed } from 'vue';
 interface IProps {
     offer: Offer;
     listingPrice: number;
+    isSold: boolean;
 }
 
 const props = defineProps<IProps>();
@@ -18,10 +19,6 @@ const difference = computed(
 
 const madeOn = computed(
     () => new Date(props.offer.created_at).toDateString()
-);
-
-const notSold = computed(
-    () => !props.offer.accepted_at && !props.offer.rejected_at
 );
 </script>
 
@@ -57,7 +54,7 @@ const notSold = computed(
 
             <div>
                 <Link
-                    v-if="notSold"
+                    v-if="!isSold"
                     :href="route('realtor.offer.accept', {offer: offer.id})"
                     class="button-outline text-sm font-medium"
                     method="put"
