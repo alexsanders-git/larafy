@@ -29,7 +29,7 @@ const notificationCount = computed(
                     </Link>
 
                     <div v-if="user" class="flex items-center gap-2">
-                        <div class="text-gray-500 relative pr-2 py-2 text-lg">
+                        <Link :href="route('notification.index')" class="text-gray-500 relative pr-2 py-2 text-lg">
                             <Bell />
 
                             <div
@@ -38,7 +38,7 @@ const notificationCount = computed(
                             >
                                 {{ notificationCount }}
                             </div>
-                        </div>
+                        </Link>
 
                         <Link :href="route('realtor.listing.index')" class="text-sm text-gray-500">
                             {{ user.name }}

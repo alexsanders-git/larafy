@@ -108,7 +108,7 @@ defineProps<IProps>();
 
     <EmptyState v-else>No listing yet</EmptyState>
 
-    <div v-if="listings.links.length" class="w-full flex justify-center mt-8">
+    <div v-if="listings.links.length > 3" class="w-full flex justify-center mt-8">
         <Pagination :links="listings.links" />
     </div>
 </template>

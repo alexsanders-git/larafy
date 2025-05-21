@@ -85,3 +85,35 @@ export interface Bidder {
     updated_at: string;
     is_admin: number;
 }
+
+export interface NotificationsResponse {
+    current_page: number;
+    data: Notifications[];
+    first_page_url: string;
+    from: number;
+    last_page: number;
+    last_page_url: string;
+    links: PaginationLink[];
+    next_page_url: any;
+    path: string;
+    per_page: number;
+    prev_page_url: any;
+    to: number;
+    total: number;
+}
+
+export interface Notifications {
+    id: string;
+    type: string;
+    notifiable_type: string;
+    notifiable_id: number;
+    data: {
+        offer_id: number
+        listing_id: number
+        bidder_id: number
+        amount: number
+    };
+    read_at: any;
+    created_at: string;
+    updated_at: string;
+}
