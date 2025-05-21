@@ -9,6 +9,7 @@ import OfferMake from '@/components/OfferMake.vue';
 import OfferMade from '@/components/OfferMade.vue';
 import { useMonthlyPayment } from '@/composables/useMonthlyPayment';
 import type { Listing, Offer } from '@/types';
+import EmptyState from '@/components/EmptyState.vue';
 
 interface IProps {
     listing: Listing;
@@ -34,8 +35,11 @@ const user = computed(
 <template>
     <Head :title="listing.city" />
     <div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
-        <Box class="md:col-span-7 flex items-center justify-center">
-            <div v-if="listing.images.length" class="grid grid-cols-2 gap-1">
+        <Box
+            v-if="listing.images.length"
+            class="md:col-span-7 flex items-center justify-center"
+        >
+            <div class="grid grid-cols-2 gap-1">
                 <img
                     v-for="image in listing.images"
                     :key="image.id"
@@ -43,9 +47,14 @@ const user = computed(
                     class="w-full h-[300px] object-cover rounded-md"
                 />
             </div>
-
-            <span v-else class="font-medium text-gray-500">No images</span>
         </Box>
+
+        <EmptyState
+            v-else
+            class="md:col-span-7 flex items-center justify-center"
+        >
+            No images
+        </EmptyState>
 
         <div class="md:col-span-5 space-y-4">
             <Box>

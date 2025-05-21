@@ -7,6 +7,7 @@ import ListingAddress from '@/components/ListingAddress.vue';
 import RealtorFilters from '@/components/RealtorFilters.vue';
 import Pagination from '@/components/Pagination.vue';
 import type { ListingsResponse, RealtorListingFilters } from '@/types';
+import EmptyState from '@/components/EmptyState.vue';
 
 interface IProps {
     filters: RealtorListingFilters;
@@ -19,9 +20,10 @@ defineProps<IProps>();
 <template>
     <Head title="Realtor" />
     <h1 class="text-3xl mb-4">Your Listings</h1>
+
     <RealtorFilters :filters="filters" class="my-4" />
 
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+    <section v-if="listings.links.length" class="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <Box
             v-for="listing in listings.data"
             :key="listing.id"
@@ -104,7 +106,9 @@ defineProps<IProps>();
         </Box>
     </section>
 
-    <div v-if="listings.links.length > 3" class="w-full flex justify-center mt-8">
+    <EmptyState v-else>No listing yet</EmptyState>
+
+    <div v-if="listings.links.length" class="w-full flex justify-center mt-8">
         <Pagination :links="listings.links" />
     </div>
 </template>
