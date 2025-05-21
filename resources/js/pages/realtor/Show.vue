@@ -43,14 +43,16 @@ const hasOffers = computed(
             </div>
         </Box>
 
-        <Box class="md:col-span-5">
-            <template #header>Basic Info</template>
+        <div class="md:col-span-5">
+            <Box>
+                <template #header>Basic Info</template>
 
-            <ListingPrice :price="listing.price" class="text-2xl font-bold" />
+                <ListingPrice :price="listing.price" class="text-2xl font-bold" />
 
-            <ListingParams :listing="listing" class="text-lg" />
+                <ListingParams :listing="listing" class="text-lg" />
 
-            <ListingAddress :listing="listing" class="text-gray-500" />
-        </Box>
+                <ListingAddress :listing="listing" class="text-gray-500" />
+            </Box>
+        </div>
     </section>
 </template>
